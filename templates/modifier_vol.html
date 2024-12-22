@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un Vol</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Modifier un Vol</h1>
+        
+        <!-- Messages Flash -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+        <div>
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Formulaire -->
+        <form method="POST">
+            <div class="mb-3">
+                <label for="NUMVOL" class="form-label">Numéro de Vol</label>
+                <input type="text" id="NUMVOL" name="NUMVOL" class="form-control" value="{{ vol.NUMVOL }}"

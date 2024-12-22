@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Avions</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Tableau de Bord des Avions</h1>
+
+        <!-- Affichage des messages flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div>
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <table class="table table-bordered table-striped mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>Numéro d'Immatriculation</th>
+                    <th>Type d'Avion</th>
+                    <th>Date de Mise en Service</th>
+                    <th>Heures depuis Dernière Révision</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for avion in avions %}
+                <tr>
+                    <td>{{ avion.NUMAV }}</td>
+                    <td>{{ avion.TYPAV }}</td>
+                    <td>{{ avion.DATMS }}</td>
+                    <td>{{ avion.NBHDDREV }}</td>
+                    <td>{{ avion.STATUTAVION }}</td>
+                    <td>
+                        <!-- Bouton Modifier -->
+                        <a href="/avions/modifier/{{ avion.NUMAV }}" class="btn btn-warning btn-sm">Modifier</a>
+                        
+                        <!-- Bouton Supprimer -->
+                        <form action="/avions/supprimer/{{ avion.NUMAV }}" method="POST" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr ?');">
+                            <button class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/ajouter_avion" class="btn btn-success">Ajouter un Avion</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

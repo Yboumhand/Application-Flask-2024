@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Vols</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Tableau de Bord des Vols</h1>
+
+        <!-- Affichage des messages flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div>
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <table class="table table-bordered table-striped mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>Numéro de Vol</th>
+                    <th>Ville de Départ</th>
+                    <th>Ville d'Arrivée</th>
+                    <th>Heure de Départ</th>
+                    <th>Durée</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vol in vols %}
+                <tr>
+                    <td>{{ vol.NUMVOL }}</td>
+                    <td>{{ vol.VILDEP }}</td>
+                    <td>{{ vol.VILARR }}</td>
+                    <td>{{ vol.HDEP }}</td>
+                    <td>{{ vol.DURVOL }}</td>
+                    <td>{{ vol.STATUTVOL }}</td>
+                    <td>
+                        <!-- Bouton Modifier -->
+                        <a href="/vols/modifier/{{ vol.NUMVOL }}" class="btn btn-warning btn-sm">Modifier</a>
+                        
+                        <!-- Bouton Supprimer -->
+                        <form action="/vols/supprimer/{{ vol.NUMVOL }}" method="POST" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr ?');">
+                            <button class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/ajouter_vol" class="btn btn-success">Ajouter un Vol</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<h3>Voulez-vous vraiment supprimer le vol {{ numvol }} ?</h3>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.confirmer(class="btn btn-danger") }}
+    {{ form.annuler(class="btn btn-secondary", formaction=url_for('gestion_vols')) }}
+</form>

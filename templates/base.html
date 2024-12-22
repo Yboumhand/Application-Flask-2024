@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compagnie Aérienne</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Mise en page globale */
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('{{ url_for('static', filename='picture.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            color: black;
+        }
+        /* Header */
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffcc00;
+        }
+        
+        nav {
+            margin-top: 15px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: #ffcc00;
+            color: black;
+            border-color: #ffcc00;
+        }
+        /* Section principale */
+        
+        main {
+            padding: 50px;
+            text-align: center;
+        }
+        /* Ajout d'un style aux boutons */
+        
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #e6b800;
+            color: black;
+        }
+        /* Pour mobile */
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            nav a {
+                margin: 0 5px;
+                font-size: 1em;
+                padding: 8px 15px;
+            }
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Compagnie Aérienne</h1>
+        <nav>
+            <a href="/">Accueil</a>
+            <a href="/avions">Gestion des avions</a>
+            <a href="/personnels">Gestion des personnels</a>
+            <a href="/vols">Gestion des vols</a>
+            
+            
+
+
+
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>
+
+</html>
